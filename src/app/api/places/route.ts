@@ -24,8 +24,9 @@ export async function GET(request: NextRequest) {
     });
 
     return NextResponse.json(places);
-  } catch {
-    return NextResponse.json({ error: "Failed to fetch places" }, { status: 500 });
+  } catch (error) {
+    console.error("GET /api/places error:", error);
+    return NextResponse.json({ error: String(error) }, { status: 500 });
   }
 }
 
@@ -62,7 +63,8 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json(place, { status: 201 });
-  } catch {
-    return NextResponse.json({ error: "Failed to create place" }, { status: 500 });
+  } catch (error) {
+    console.error("POST /api/places error:", error);
+    return NextResponse.json({ error: String(error) }, { status: 500 });
   }
 }
